@@ -46,6 +46,38 @@ public class AppUser implements UserDetails{
 		this.appUserRole = appUserRole;
 	}
 
+	public Boolean getLocked() {
+		return locked;
+	}
+
+	public void setLocked(Boolean locked) {
+		this.locked = locked;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setAppUserRole(AppUserRole appUserRole) {
+		this.appUserRole = appUserRole;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	private String firstName;
 	private String lastName;
 	private String email;

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -14,9 +15,11 @@ public class AppUserService implements UserDetailsService {
 	
 	@Autowired
 	private final AppUserRepository appUserRepository;
+	private final BCryptPasswordEncoder bcPasswordEncoder;
 
 	public AppUserService(AppUserRepository appUserRepository) {
 		this.appUserRepository = appUserRepository;
+		this.bcPasswordEncoder = new BCryptPasswordEncoder();
 	}
 
 	@Override
@@ -29,7 +32,17 @@ public class AppUserService implements UserDetailsService {
 		boolean userExists = appUserRepository
 				.findByEmail(appUser.getUsername())
 				.isPresent();
+		if (userExists) {
+			throw new IllegalStateException("Email already taken");
+		}
 		
+		String encodedPassword = bcPasswordEncoder.encode(appUser.getPassword());
+		
+		appUser.setPassword(encodedPassword);
+		
+		appUserRepository.save(appUser);
+		
+		return "it works";
 	}
 
 }
