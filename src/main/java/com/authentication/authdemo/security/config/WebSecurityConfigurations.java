@@ -27,10 +27,10 @@ public class WebSecurityConfigurations {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/api/v*/register/**").permitAll()
+                        authorize.requestMatchers("/api/v*/registration/**").permitAll()
                 ).formLogin(
                         form -> form
-                                .defaultSuccessUrl("/users")
+                                .defaultSuccessUrl("/dashboard")
                                 .permitAll()
                 ).logout(
                         logout -> logout

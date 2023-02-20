@@ -35,11 +35,7 @@ public class AppUserService implements UserDetailsService {
 		if (userExists) {
 			throw new IllegalStateException("Email already taken");
 		}
-		
-		String encodedPassword = bcPasswordEncoder.encode(appUser.getPassword());
-		
-		appUser.setPassword(encodedPassword);
-		
+
 		appUserRepository.save(appUser);
 		
 		return "it works";
