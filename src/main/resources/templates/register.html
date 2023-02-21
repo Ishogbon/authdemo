@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+	<head>
+		<meta charset = "ISO-8859-1">
+		<title>AppUser Registration Page</title>
+		<style>
+			h1 {
+				color: lightgreen;
+				text-decoration: underline;
+			}
+			form {
+				width: 50%;
+				margin: 0 auto;
+				margin-top: 5%;
+				box-shadow: 1px 1px 4px 2px #ddd;
+				padding: 2%;
+			}
+			label, input {
+				display: block;
+				width: 100%;
+			}
+			input {
+				border: none;
+				outline: none;
+				border-bottom: 2px solid green;
+			}
+			label {
+				margin-top:4%;
+			}
+			button {
+				margin-left: 75%;
+				margin-top: 6%;
+				background: lightgreen;
+				color:white;
+				width: 20%;
+				border: none;
+				padding: 1%;
+				cursor: pointer
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Register An Account</h1>
+		
+		<form action="api/v1/registration" method="post">
+			<label for = "firstName">First Name</label>
+			<input type = "text" name="firstName" >
+			
+			<label for = "lastName">Last Name</label>
+			<input type = "text" name="lastName" >
+			
+			<label for = "email">Email</label>
+			<input type = "email" name="email" >
+			
+			<label for = "role">Role</label>
+			<select name = "role">
+				<option>USER</option>
+				<option>ADMIN</option>
+				<option>DRIVER</option>
+				<option>SUPERVISOR</option>
+			</select>
+			
+			<label for = "password">Password</label>
+			<input type = "password" name="password" >
+			
+			<button type="submit">Submit</button>
+		</form>
+	</body>
+</html>

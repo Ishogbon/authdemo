@@ -15,6 +15,8 @@ public class AppUserService implements UserDetailsService {
 	
 	@Autowired
 	private final AppUserRepository appUserRepository;
+	
+	@Autowired
 	private final BCryptPasswordEncoder bcPasswordEncoder;
 
 	public AppUserService(AppUserRepository appUserRepository) {
@@ -25,20 +27,27 @@ public class AppUserService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
+		System.out.println(appUserRepository.findByEmail(email).toString());
 		return appUserRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email + "user not found"));
 	}
 	
 	public String signUpUser(AppUser appUser) {
+		
 		boolean userExists = appUserRepository
 				.findByEmail(appUser.getUsername())
 				.isPresent();
 		if (userExists) {
 			throw new IllegalStateException("Email already taken");
 		}
-
+		
+		String encodedPassword = bcPasswordEncoder
+                .encode(appUser.getPassword());
+		
+        appUser.setPassword(encodedPassword);
+        
 		appUserRepository.save(appUser);
 		
-		return "it works";
+		return "you have been successfully registered";
 	}
 
 }

@@ -1,13 +1,10 @@
 package com.authentication.authdemo.registration;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-@Getter
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
@@ -24,6 +21,18 @@ public class RegistrationRequest {
 	}
 	public String getEmail() {
 		return email;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getPassword() {
 		return password;

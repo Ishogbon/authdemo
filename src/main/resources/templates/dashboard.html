@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+	<head>
+		<meta charset = "ISO-8859-1">
+		<title>AppUser Profile Panel</title>
+		<style>
+			h1 {
+				color: lightgreen;
+				text-decoration: underline;
+			}
+			#main-div {
+				width: 50%;
+				margin: 0 auto;
+				margin-top: 5%;
+				box-shadow: 1px 1px 4px 2px #ddd;
+				padding: 2%;
+			}
+			#main-div > div {
+				margin-top: 6%;
+				margin-bottom: 6%;
+				background: green;
+				padding: 1%;
+				color: white;
+			}
+			.value {
+				float: right;
+			}
+
+		</style>
+	</head>
+	<body>
+		<h1>Profile Panel</h1>
+		
+		<div id="main-div">
+			<div>
+				<span class = "title"><span>First Name:</span>
+				<span class = "value"><span>firstName</span>
+			</div>
+			
+			
+			<div>
+				<span class = "title">Last Name:</span>
+				<span class = "value">lastName</span>
+			</div>
+			
+			<div>
+				<span class = "title"><span>Email: </span>
+				<span class = "value"><span>email</span>
+			</div>
+			
+			<div>
+				<span class = "title"><span>Role: </span>
+				<span class = "value"><span>appUserRole</span>
+			</div>
+			
+		</div>
+	</body>
+</html>

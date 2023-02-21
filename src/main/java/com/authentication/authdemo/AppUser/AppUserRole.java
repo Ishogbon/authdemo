@@ -4,6 +4,5 @@ public enum AppUserRole {
 	USER,
 	ADMIN,
 	DRIVER,
-	SUPERVISOR,
-	CUSTOMER
+	SUPERVISOR
 }

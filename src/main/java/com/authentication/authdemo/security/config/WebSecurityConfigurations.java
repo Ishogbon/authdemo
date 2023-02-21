@@ -17,26 +17,30 @@ public class WebSecurityConfigurations {
 
     @Autowired
     private UserDetailsService userDetailsService;
-
+    
     @Bean
-    public static PasswordEncoder passwordEncoder(){
+    public static PasswordEncoder bcPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/api/v*/registration/**").permitAll()
-                ).formLogin(
-                        form -> form
-                                .defaultSuccessUrl("/dashboard")
-                                .permitAll()
-                ).logout(
-                        logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .permitAll()
-                );
+    	http
+        .authorizeHttpRequests((authorize) ->
+                authorize.requestMatchers("/api/v*/registration/**", "/api/v*/registration/**", "/register").permitAll()
+                .requestMatchers("/dashboard/**").permitAll()
+                .anyRequest().authenticated()
+        ).formLogin(
+                form -> form
+                .loginProcessingUrl("/login")
+                .successHandler((request, response, authentication) -> {
+                    response.sendRedirect("/dashboard");
+                })
+                .permitAll()
+        ).logout(
+                logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .permitAll()
+        );
         return http.build();
     }
 
@@ -44,6 +48,6 @@ public class WebSecurityConfigurations {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
+        		.passwordEncoder(bcPasswordEncoder());
     }
 }
